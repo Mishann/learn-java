@@ -3,8 +3,6 @@ package com.app;
 import com.app.model.Person;
 import com.app.utils.Utils;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Streams;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
