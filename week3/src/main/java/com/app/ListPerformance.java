@@ -26,6 +26,4 @@ public class ListPerformance {
             Integer res = list.get(new Random().nextInt(list.size() - 1));
         }
     }
-
-
 }
