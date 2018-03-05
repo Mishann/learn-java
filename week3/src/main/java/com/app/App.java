@@ -6,6 +6,8 @@ import com.app.domain.ActionImpl;
 import com.app.domain.Person;
 import com.app.domain.annotation.ClassInfo;
 import com.app.domain.annotation.Primary;
+import com.app.multithreading.CountThread;
+import com.app.multithreading.Counter;
 import com.google.common.collect.Lists;
 
 import java.lang.reflect.Field;
@@ -13,13 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
+
     public static void main(String[] args) throws IllegalAccessException {
-/*
-flatMapExample();
-interfacesWithSameMethodsExample();
-*/
+
+        flatMapExample();
+        interfacesWithSameMethodsExample();
         annotationExample();
 
+        synchronizedExample();
     }
 
     private static void flatMapExample() {
@@ -69,6 +72,27 @@ interfacesWithSameMethodsExample();
 
 
     }
+
+    private static void synchronizedExample() {
+        Counter counter = new Counter();
+
+        Thread thread1 = new CountThread(counter);
+        thread1.setName("thread1");
+        thread1.setDaemon(false);
+
+        Thread thread2 = new CountThread(counter);
+        thread2.setName("thread2");
+        thread2.setDaemon(true);
+
+        Thread thread3 = new CountThread(counter);
+        thread3.setName("thread2");
+        thread3.setDaemon(true);
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+    }
+
 
 }
 

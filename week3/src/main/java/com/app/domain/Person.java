@@ -10,7 +10,7 @@ public class Person {
     private String firstName;
     private String lastName;
 
-    @Primary(required = true, actual = 1)
+    @Primary
     private String[] phones;
 
     public String getFirstName() {
