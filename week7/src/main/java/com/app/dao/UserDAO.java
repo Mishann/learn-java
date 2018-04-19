@@ -11,5 +11,7 @@ public interface UserDAO {
 
     void delete(User u);
 
+    User findOne(Long id);
+
     List<User> findAll();
 }

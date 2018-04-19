@@ -1,10 +1,15 @@
 package com.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Factory")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Factory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +23,8 @@ public class Factory implements Serializable {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    public Factory(){}
+    public Factory() {
+    }
 
     public Long getId() {
         return id;
@@ -42,5 +48,21 @@ public class Factory implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Factory factory = (Factory) o;
+        return Objects.equals(id, factory.id) &&
+                Objects.equals(role, factory.role) &&
+                Objects.equals(user, factory.user);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, role, user);
     }
 }
